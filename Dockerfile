@@ -2,9 +2,12 @@ FROM python:3
 
 ENV DEBIAN_FRONTEND=noninteractive \
     TZ=Asia/Jakarta \
-    GECKO_URL=https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz
+    GECKO_URL=https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz \
+    CRYPTOGRAPHY_DONT_BUILD_RUST=1 \
+    PIP_DISABLE_ROOT_WARNING=1
 
-RUN echo "invoke >= 0.20" > requirements.txt && \
+RUN echo "cryptography == 3.4.6" > requirements.txt && \
+    echo "invoke >= 0.20" >> requirements.txt && \
     echo "rellu >= 0.6" >> requirements.txt && \
     echo "docutils >= 0.14" >> requirements.txt && \
     echo "robotframework >= 3.1.1" >> requirements.txt && \
